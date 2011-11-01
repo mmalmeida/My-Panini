@@ -8,6 +8,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Parcelable.Creator;
 import android.util.Log;
 
 /**
@@ -60,7 +61,7 @@ public class StickerAlbumDbAdapter {
         public void onCreate(SQLiteDatabase db) {
 
             db.execSQL(DATABASE_CREATE_ALBUM);
-            db.execSQL(DATABASE_CREATE_STICKERS);
+            db.execSQL(DATABASE_CREATE_STICKERS);            
         }
 
         @Override
@@ -77,7 +78,15 @@ public class StickerAlbumDbAdapter {
 	public StickerAlbumDbAdapter open() {
         mDbHelper = new DatabaseHelper(mCtx);
         mDb = mDbHelper.getWritableDatabase();
+        initializeStickerCollection();
 		return this;
+	}
+
+	private void initializeStickerCollection() {
+		if(getAllAlbums().getCount() == 0){
+			createAlbum("UEFA Euro 2008", 1, 535, null);
+		}
+		
 	}
 
 	public Cursor getAllAlbums() {

@@ -14,13 +14,16 @@ import at.almeida.mypanini.adapters.SitckerAdapter;
 public class MissingItemsActivity extends StickerAbstractActivity {
 
 	private Long albumId;
+	
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.sticker_gridview);
         GridView gridview = (GridView) findViewById(R.id.stickergridview);
         
-        SitckerAdapter stickerAdapter = new SitckerAdapter(this);
+        albumId = retrieveAlbumId(savedInstanceState);
+        
+        SitckerAdapter stickerAdapter = new SitckerAdapter(this,albumId);
         stickerAdapter.changeFont(findFont(FONT_MIA));
 		gridview.setAdapter(stickerAdapter);
         gridview.setBackgroundColor(Color.WHITE);
@@ -36,13 +39,19 @@ public class MissingItemsActivity extends StickerAbstractActivity {
         });
 
         
-        albumId = (savedInstanceState == null) ? null :
+        
+    }
+    
+    
+	private Long retrieveAlbumId(Bundle savedInstanceState) {
+		Long id = (savedInstanceState == null) ? null :
             (Long) savedInstanceState.getSerializable(StickerAlbumDbAdapter.KEY_ID);
         if (albumId == null) {
             Bundle extras = getIntent().getExtras();
-            albumId = extras != null ? extras.getLong(StickerAlbumDbAdapter.KEY_ID)
+            id = extras != null ? extras.getLong(StickerAlbumDbAdapter.KEY_ID)
                                     : null;
         }
-    }
+        return id;
+	}
 
 }
