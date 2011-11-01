@@ -23,7 +23,7 @@ public class StickerAlbumDbAdapter {
 	public static final String KEY_NAME = "title";
 	public static final String KEY_ID = "_id";
 	public static final String KEY_NUMBER = "number";
-	public static final String KEY_TIMES = "times";
+	public static final String KEY_COUNT = "count";
 	public static final String FK_ALBUM = "album_id";
 	public static final String TABLE_ALBUM = "album";
 	public static final String TABLE_STICKERS = "sticker";
@@ -39,7 +39,7 @@ public class StickerAlbumDbAdapter {
         "create table " + TABLE_STICKERS + " ("+KEY_ID+" integer primary key autoincrement, "
                 + KEY_NUMBER + " text not null, " 
                 + FK_ALBUM +" integer not null, "
-                + KEY_TIMES + " integer default 0"
+                + KEY_COUNT + " integer default 0"
                 + ");";
     
     /**
@@ -113,22 +113,22 @@ public class StickerAlbumDbAdapter {
     }
 
 	public Cursor getAlbumStickers(long albumID) {
-		return mDb.query(TABLE_STICKERS,  new String[] {KEY_ID,KEY_NUMBER,KEY_TIMES,FK_ALBUM}, FK_ALBUM + "= "+ albumID, null, null, null, null);
+		return mDb.query(TABLE_STICKERS,  new String[] {KEY_ID,KEY_NUMBER,KEY_COUNT,FK_ALBUM}, FK_ALBUM + "= "+ albumID, null, null, null, null);
 	}
 
 	public Cursor getAlbumMissingStickers(long albumId) {
 		
-		return mDb.query(TABLE_STICKERS,  new String[] {KEY_ID,KEY_NUMBER,KEY_TIMES,FK_ALBUM}, FK_ALBUM + "= "+ albumId + " AND " + KEY_TIMES + " = 0", null, null, null, null);
+		return mDb.query(TABLE_STICKERS,  new String[] {KEY_ID,KEY_NUMBER,KEY_COUNT,FK_ALBUM}, FK_ALBUM + "= "+ albumId + " AND " + KEY_COUNT + " = 0", null, null, null, null);
 	}
 
 	private Cursor generalStickerQuery(String where) {
 		
-		return mDb.query(TABLE_STICKERS,  new String[] {KEY_ID,KEY_NUMBER,KEY_TIMES,FK_ALBUM}, where, null, null, null, null);
+		return mDb.query(TABLE_STICKERS,  new String[] {KEY_ID,KEY_NUMBER,KEY_COUNT,FK_ALBUM}, where, null, null, null, null);
 	}
 	private void insertAlbumLine(String stickerNumber,int times,long albumId){
     	ContentValues initialValues = new ContentValues();
     	initialValues.put(KEY_NUMBER, stickerNumber);
-    	initialValues.put(KEY_TIMES, 0);
+    	initialValues.put(KEY_COUNT, 0);
     	initialValues.put(FK_ALBUM, albumId);
     	mDb.insert(TABLE_STICKERS, null, initialValues);
 	}
@@ -142,12 +142,12 @@ public class StickerAlbumDbAdapter {
 		mDb.endTransaction();
 	}
 
-	public void changeStickerCount(int stickerToChange, int newCount) {
+	public void changeStickerCount(Long stickerIdToChange, int newCount) {
 		mDb.beginTransaction();
 		ContentValues updateValues = new ContentValues();
-		updateValues.put(KEY_NUMBER, stickerToChange);
-		updateValues.put(KEY_TIMES, newCount);
-		mDb.update(TABLE_STICKERS, updateValues, KEY_ID+"=?",  new String []{String.valueOf(stickerToChange)});
+		//updateValues.put(KEY_NUMBER, stickerIdToChange);
+		updateValues.put(KEY_COUNT, newCount);
+		mDb.update(TABLE_STICKERS, updateValues, KEY_ID+"=?",  new String []{String.valueOf(stickerIdToChange)});
 		
 		mDb.setTransactionSuccessful();
 		mDb.endTransaction();

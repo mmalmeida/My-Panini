@@ -10,9 +10,7 @@ import at.almeida.mypanini.activity.MissingItemsActivity;
 
 public class MyPanini extends TabActivity {
 	
-	StickerAlbumDbAdapter stickerDbAdapter;
-
-	
+		
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

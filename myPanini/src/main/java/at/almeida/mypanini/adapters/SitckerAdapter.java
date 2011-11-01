@@ -1,9 +1,12 @@
 package at.almeida.mypanini.adapters;
 
-import java.util.Iterator;
+import java.util.HashSet;
+import java.util.Set;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.view.Gravity;
 import android.view.View;
@@ -22,7 +25,10 @@ import at.almeida.mypanini.StickerAlbumDbAdapter;
 public class SitckerAdapter extends BaseAdapter {
 
 	private Context context;
-	private String[] texts;
+	private String[] stickers;
+	private Long[] stickersId;
+	private Integer[] stickersCount;
+	private Set<Integer> currentlySelected = new HashSet<Integer>();
 	private int size;
 	private StickerAlbumDbAdapter stickerDbAdapter;
 	private Long albumId;
@@ -59,14 +65,20 @@ public class SitckerAdapter extends BaseAdapter {
 		stickerDbAdapter.open();
 		if (albumId != null) {
 			Cursor missingStickers = stickerDbAdapter
-					.getAlbumMissingStickers(albumId);
+					.getAlbumStickers(albumId);
 
 			size = missingStickers.getCount();
-			texts = new String[size];
+			stickers = new String[size];
+			stickersId= new Long[size];
+			stickersCount= new Integer[size];
 			missingStickers.moveToFirst();
-			int index = missingStickers.getColumnIndex(StickerAlbumDbAdapter.KEY_NUMBER);
+			int numberIndex = missingStickers.getColumnIndex(StickerAlbumDbAdapter.KEY_NUMBER);
+			int idIndex = missingStickers.getColumnIndex(StickerAlbumDbAdapter.KEY_ID);
+			int countIndex = missingStickers.getColumnIndex(StickerAlbumDbAdapter.KEY_COUNT);
 			while (missingStickers.isAfterLast() == false) {
-				texts[missingStickers.getPosition()] = missingStickers.getString(index);
+				stickers[missingStickers.getPosition()] = missingStickers.getString(numberIndex);
+				stickersId[missingStickers.getPosition()] = missingStickers.getLong(idIndex);
+				stickersCount[missingStickers.getPosition()] = missingStickers.getInt(countIndex);
 				missingStickers.moveToNext();
 			}
 		}
@@ -79,12 +91,12 @@ public class SitckerAdapter extends BaseAdapter {
 		return size;
 	}
 
-	public Object getItem(int position) {
-		return null;
+	public String getItem(int position) {
+		return stickers[position];
 	}
 
 	public long getItemId(int position) {
-		return 0;
+		return stickersId[position];
 	}
 
 	public View getView(int position, View convertView, ViewGroup parent) {
@@ -100,14 +112,66 @@ public class SitckerAdapter extends BaseAdapter {
 		if (font != null) {
 			tv.setTypeface(font);
 		}
-		tv.setText(texts[position]);
+		if(stickersCount[position] >0){
+			markAsHaveIt(tv);			
+		}
+		else{
+			markAsDontHaveIt(tv);
+		}
+		tv.setText(stickers[position]);
 		tv.setGravity(Gravity.CENTER);
 		return tv;
 	}
 
+
+
 	public void changeFont(Typeface findFont) {
 		font = findFont;
+		
 
 	}
 
+	public void updateCurrentSelection(View v,int position,long stickerToChangeId) {
+		TextView textView =((TextView)v); 
+		if( iscurrentlySelected(position)){
+			stickersCount[position] = 0;
+			markAsDontHaveIt(textView);
+			stickerDbAdapter.changeStickerCount(stickerToChangeId, 0);
+		}					
+		else{
+			stickersCount[position] = 1;
+			markAsHaveIt(textView);
+			stickerDbAdapter.changeStickerCount(stickerToChangeId, 1);
+		}
+			
+	}
+
+	//TODO - Might be better off at StickerAdapter
+	private boolean iscurrentlySelected(int position) {
+		if(stickersCount[position] >0)
+			return true;
+		else
+			return false;	
+	}
+	
+	/**
+	 * Changes the sticker's text view to visually show we have it
+	 * @param tv
+	 */
+	private void markAsHaveIt(TextView tv) {
+		tv.setBackgroundColor(Color.RED);	
+		tv.setPaintFlags( tv.getPaintFlags() |Paint.STRIKE_THRU_TEXT_FLAG);
+		
+	}
+	
+	/**
+	 * Changes the sticker's text view to visually show we DON'T have it
+	 * @param tv
+	 */
+	private void markAsDontHaveIt(TextView tv) {
+		tv.setBackgroundColor(Color.WHITE);
+		tv.setPaintFlags( tv.getPaintFlags()  & ~ Paint.STRIKE_THRU_TEXT_FLAG);
+		
+	}
 }
+
