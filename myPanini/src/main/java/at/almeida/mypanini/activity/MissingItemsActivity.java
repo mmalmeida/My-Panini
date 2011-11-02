@@ -1,6 +1,5 @@
 package at.almeida.mypanini.activity;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -32,7 +31,6 @@ public class MissingItemsActivity extends StickerAbstractActivity {
         stickerAdapter = new SitckerAdapter(this,albumId);
         stickerAdapter.changeFont(findFont(FONT_MIA));
 		gridview.setAdapter(stickerAdapter);
-        gridview.setBackgroundColor(Color.WHITE);
         
         //currently sets the sticker count to 1
         gridview.setOnItemClickListener(new OnItemClickListener() {
