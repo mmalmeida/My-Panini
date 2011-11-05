@@ -113,7 +113,7 @@ public class StickerAlbumDbAdapter {
     }
 
 	public Cursor getAlbumStickers(long albumID) {
-		return mDb.query(TABLE_STICKERS,  new String[] {KEY_ID,KEY_NUMBER,KEY_COUNT,FK_ALBUM}, FK_ALBUM + "= "+ albumID, null, null, null, null);
+		return mDb.query(TABLE_STICKERS,  new String[] {KEY_ID,KEY_NUMBER,KEY_COUNT,FK_ALBUM}, FK_ALBUM + "= "+ albumID, null, null, null, KEY_ID);
 	}
 
 	public Cursor getAlbumMissingStickers(long albumId) {

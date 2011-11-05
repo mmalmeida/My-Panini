@@ -117,22 +117,20 @@ public class SitckerAdapter extends BaseAdapter {
 			// Inflate the layout
 			LayoutInflater li = context.getLayoutInflater();
 			myView = li.inflate(R.layout.missing_item_gridview, null, true);
-			// Add The Text!!!
-			TextView tv = (TextView) myView
-					.findViewById(R.id.missing_item_grid_text);
-			// Change font if it has been set
-			if (font != null) {
-				tv.setTypeface(font);
-			}
-			if (stickersCount[position] > 0) {
-				markAsHaveIt(myView);
-			} else {
-				markAsDontHaveIt(myView);
-			}
-			tv.setText(stickers[position]);
-
-
 		}
+		// Add The Text!!!
+		TextView tv = (TextView) myView
+				.findViewById(R.id.missing_item_grid_text);
+		// Change font if it has been set
+		if (font != null) {
+			tv.setTypeface(font);
+		}
+		if (stickersCount[position] > 0) {
+			markAsHaveIt(myView);
+		} else {
+			markAsDontHaveIt(myView);
+		}
+		tv.setText(stickers[position]);
 
 		return myView;
 	}
@@ -170,10 +168,10 @@ public class SitckerAdapter extends BaseAdapter {
 	 * @param tv
 	 */
 	private void markAsHaveIt(View view) {
-		 ImageView iv =
-		 (ImageView)view.findViewById(R.id.missing_item_grid_image);
-		 iv.setImageResource(R.drawable.scratched);
-		 iv.setVisibility(View.VISIBLE);
+		ImageView iv = (ImageView) view
+				.findViewById(R.id.missing_item_grid_image);
+		iv.setImageResource(R.drawable.scratched);
+		iv.setVisibility(View.VISIBLE);
 
 	}
 
@@ -183,9 +181,9 @@ public class SitckerAdapter extends BaseAdapter {
 	 * @param tv
 	 */
 	private void markAsDontHaveIt(View view) {
-		 ImageView iv =
-		 (ImageView)view.findViewById(R.id.missing_item_grid_image);
-		 iv.setVisibility(View.GONE);
+		ImageView iv = (ImageView) view
+				.findViewById(R.id.missing_item_grid_image);
+		iv.setVisibility(View.GONE);
 
 	}
 }
