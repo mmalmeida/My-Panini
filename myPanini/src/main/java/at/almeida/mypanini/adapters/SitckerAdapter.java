@@ -100,6 +100,9 @@ public class SitckerAdapter extends BaseAdapter {
 		return size;
 	}
 
+	public int getStickerCountAtPosition(int position) {
+		return stickersCount[position];
+	}
 	public String getItem(int position) {
 		return stickers[position];
 	}

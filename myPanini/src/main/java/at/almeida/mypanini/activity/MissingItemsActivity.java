@@ -8,6 +8,7 @@ import android.widget.GridView;
 import at.almeida.mypanini.R;
 import at.almeida.mypanini.StickerAlbumDbAdapter;
 import at.almeida.mypanini.adapters.SitckerAdapter;
+import at.almeida.mypanini.listeners.MissingStickerLongItemClickListener;
 
 public class MissingItemsActivity extends StickerAbstractActivity {
 
@@ -32,7 +33,6 @@ public class MissingItemsActivity extends StickerAbstractActivity {
         stickerAdapter.changeFont(findFont(FONT_MIA));
 		gridview.setAdapter(stickerAdapter);
         
-        //currently sets the sticker count to 1
         gridview.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View v, int position,
 					long id) {
@@ -42,6 +42,9 @@ public class MissingItemsActivity extends StickerAbstractActivity {
 			}
 
         });
+        
+        //adds the functionality on long item press
+        gridview.setOnItemLongClickListener(new MissingStickerLongItemClickListener(this,stickerAdapter));
 
     }
     
