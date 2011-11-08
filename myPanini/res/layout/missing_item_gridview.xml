@@ -6,9 +6,8 @@
 	>
 
     <TextView
-        android:id="@+id/missing_item_grid_text"
-		android:paddingLeft="1px"
-		android:paddingBottom="6px"
+        android:id="@+id/missing_item_grid_text"		
+		android:paddingBottom="5px"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"              
@@ -19,7 +18,7 @@
         android:layout_alignTop="@+id/missing_item_grid_text"
     	android:layout_alignBottom="@+id/missing_item_grid_text"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
- 
+        android:layout_height="fill_parent" 
+        android:background="@color/white"
         />
 </RelativeLayout>
