@@ -4,17 +4,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 import android.app.Activity;
-import android.content.Context;
 import android.database.Cursor;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.Typeface;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import at.almeida.mypanini.R;
@@ -100,6 +95,12 @@ public class SitckerAdapter extends BaseAdapter {
 		return size;
 	}
 
+	/**
+	 * Returns the sticker count at position. The information is stored in
+	 * an array of this class
+	 * @param position
+	 * @return
+	 */
 	public int getStickerCountAtPosition(int position) {
 		return stickersCount[position];
 	}
@@ -107,6 +108,12 @@ public class SitckerAdapter extends BaseAdapter {
 		return stickers[position];
 	}
 
+	/**
+	 * Returns the sticker id at position. The information is stored in
+	 * an array of this class
+	 * @param position
+	 * @return
+	 */
 	public long getItemId(int position) {
 		return stickersId[position];
 	}

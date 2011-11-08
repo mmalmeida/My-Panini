@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+	android:background="@color/white"
+	>
+
+    <TextView
+        android:id="@+id/missing_item_grid_text"
+		android:paddingLeft="1px"
+		android:paddingBottom="6px"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"              
+        />
+
+        <ImageView
+        android:id="@+id/missing_item_grid_image"
+        android:layout_alignTop="@+id/missing_item_grid_text"
+    	android:layout_alignBottom="@+id/missing_item_grid_text"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+ 
+        />
+</RelativeLayout>

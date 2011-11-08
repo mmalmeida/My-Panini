@@ -4,13 +4,20 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
+    <uses-sdk android:minSdkVersion="8" />
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:smallScreens="true" />
+
     <application
         android:debuggable="true"
         android:icon="@drawable/icon"
         android:label="@string/app_album"
         android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
-        <activity            
-            android:name=".MyPanini" >
+        <activity android:name=".MyPanini" >
             <intent-filter >
                 <action android:name="android.intent.action.MAIN" />
 
