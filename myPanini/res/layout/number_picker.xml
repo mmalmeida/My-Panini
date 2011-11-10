@@ -20,7 +20,7 @@
 
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <com.quietlycoding.android.picker.NumberPickerButton android:id="@+id/increment"
+    <at.almeida.picker.NumberPickerButton android:id="@+id/increment"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/timepicker_up_btn" />
@@ -35,7 +35,7 @@
         android:textSize="30sp"
         android:background="@drawable/timepicker_input" />
 
-    <com.quietlycoding.android.picker.NumberPickerButton android:id="@+id/decrement"
+    <at.almeida.picker.NumberPickerButton android:id="@+id/decrement"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/timepicker_down_btn" />

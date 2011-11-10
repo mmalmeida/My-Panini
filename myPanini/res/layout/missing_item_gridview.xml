@@ -6,8 +6,10 @@
 	>
 
     <TextView
-        android:id="@+id/missing_item_grid_text"		
-		android:paddingBottom="5px"
+        android:id="@+id/missing_item_grid_text"
+        android:textSize="17sp"		
+		android:paddingBottom="4sp"
+		android:paddingLeft="4sp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"              
