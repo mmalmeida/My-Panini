@@ -6,8 +6,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 import at.almeida.mypanini.R;
-import at.almeida.mypanini.StickerAlbumDbAdapter;
 import at.almeida.mypanini.adapters.SitckerAdapter;
+import at.almeida.mypanini.adapters.StickerAlbumDbAdapter;
 import at.almeida.mypanini.listeners.MissingStickerLongItemClickListener;
 
 public class MissingItemsActivity extends StickerAbstractActivity {

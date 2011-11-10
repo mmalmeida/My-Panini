@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import at.almeida.mypanini.adapters.StickerAlbumDbAdapter;
 
 public class AlbumCreate extends Activity{
 

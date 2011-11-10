@@ -1,4 +1,4 @@
-package at.almeida.mypanini;
+package at.almeida.mypanini.adapters;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -8,7 +8,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.Parcelable.Creator;
 import android.util.Log;
 
 /**

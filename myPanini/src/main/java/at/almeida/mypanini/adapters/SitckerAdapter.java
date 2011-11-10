@@ -13,7 +13,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import at.almeida.mypanini.R;
-import at.almeida.mypanini.StickerAlbumDbAdapter;
+import at.almeida.mypanini.model.StickerAlbumMemory;
 
 /**
  * BaseAdapter for our sticker collection.
@@ -24,22 +24,21 @@ import at.almeida.mypanini.StickerAlbumDbAdapter;
 public class SitckerAdapter extends BaseAdapter {
 
 	private Activity context;
-	private String[] stickers;
-	private Long[] stickersId;
-	private Integer[] stickersCount;
+
 	private Set<Integer> currentlySelected = new HashSet<Integer>();
 	private int size;
 	private StickerAlbumDbAdapter stickerDbAdapter;
-	private Long albumId;
+
+	private StickerAlbumMemory album;
 
 	private Typeface font;
 
 	public Long getAlbumId() {
-		return albumId;
+		return album.getAlbumId();
 	}
 
 	public void setAlbumId(Long albumId) {
-		this.albumId = albumId;
+		album.setAlbumId(albumId);
 	}
 
 	public Typeface getFont() {
@@ -55,7 +54,7 @@ public class SitckerAdapter extends BaseAdapter {
 	}
 
 	public SitckerAdapter(Activity context, Long albumId) {
-		setAlbumId(albumId);
+		
 		buildFromAlbumId(context, albumId);
 	}
 
@@ -66,9 +65,9 @@ public class SitckerAdapter extends BaseAdapter {
 			Cursor missingStickers = stickerDbAdapter.getAlbumStickers(albumId);
 
 			size = missingStickers.getCount();
-			stickers = new String[size];
-			stickersId = new Long[size];
-			stickersCount = new Integer[size];
+			album = new StickerAlbumMemory(size);
+			setAlbumId(albumId);
+
 			missingStickers.moveToFirst();
 			int numberIndex = missingStickers
 					.getColumnIndex(StickerAlbumDbAdapter.KEY_NUMBER);
@@ -77,12 +76,16 @@ public class SitckerAdapter extends BaseAdapter {
 			int countIndex = missingStickers
 					.getColumnIndex(StickerAlbumDbAdapter.KEY_COUNT);
 			while (missingStickers.isAfterLast() == false) {
-				stickers[missingStickers.getPosition()] = missingStickers
-						.getString(numberIndex);
-				stickersId[missingStickers.getPosition()] = missingStickers
-						.getLong(idIndex);
-				stickersCount[missingStickers.getPosition()] = missingStickers
-						.getInt(countIndex);
+				int position = missingStickers.getPosition();
+				album.setStickerAtPosition(position,
+						missingStickers.getString(numberIndex));
+
+				album.setStickerIdAtPosition(position,
+						missingStickers.getLong(idIndex));
+	
+				album.setStickerCountAtPosition(position,
+						missingStickers.getInt(countIndex));
+
 				missingStickers.moveToNext();
 			}
 		}
@@ -96,26 +99,29 @@ public class SitckerAdapter extends BaseAdapter {
 	}
 
 	/**
-	 * Returns the sticker count at position. The information is stored in
-	 * an array of this class
+	 * Returns the sticker count at position. The information is stored in an
+	 * array of this class
+	 * 
 	 * @param position
 	 * @return
 	 */
 	public int getStickerCountAtPosition(int position) {
-		return stickersCount[position];
+		return album.getStickerCountAtPosition(position);
 	}
+
 	public String getItem(int position) {
-		return stickers[position];
+		return album.getStickerAtPosition(position);
 	}
 
 	/**
-	 * Returns the sticker id at position. The information is stored in
-	 * an array of this class
+	 * Returns the sticker id at position. The information is stored in an array
+	 * of this class
+	 * 
 	 * @param position
 	 * @return
 	 */
 	public long getItemId(int position) {
-		return stickersId[position];
+		return album.getStickerIdAtPosition(position);
 	}
 
 	public View getView(int position, View convertView, ViewGroup parent) {
@@ -135,12 +141,12 @@ public class SitckerAdapter extends BaseAdapter {
 		if (font != null) {
 			tv.setTypeface(font);
 		}
-		if (stickersCount[position] > 0) {
+		if (album.getStickerCountAtPosition(position)> 0) {
 			markAsHaveIt(myView);
 		} else {
 			markAsDontHaveIt(myView);
 		}
-		tv.setText(stickers[position]);
+		tv.setText(album.getStickerAtPosition(position));
 
 		return myView;
 	}
@@ -153,11 +159,11 @@ public class SitckerAdapter extends BaseAdapter {
 	public void updateCurrentSelection(View v, int position,
 			long stickerToChangeId) {
 		if (iscurrentlySelected(position)) {
-			stickersCount[position] = 0;
+			album.setStickerCountAtPosition(position,0);
 			markAsDontHaveIt(v);
 			stickerDbAdapter.changeStickerCount(stickerToChangeId, 0);
 		} else {
-			stickersCount[position] = 1;
+			album.setStickerCountAtPosition(position,1);
 			markAsHaveIt(v);
 			stickerDbAdapter.changeStickerCount(stickerToChangeId, 1);
 		}
@@ -166,7 +172,7 @@ public class SitckerAdapter extends BaseAdapter {
 
 	// TODO - Might be better off at StickerAdapter
 	private boolean iscurrentlySelected(int position) {
-		if (stickersCount[position] > 0)
+		if (album.getStickerCountAtPosition(position) > 0)
 			return true;
 		else
 			return false;

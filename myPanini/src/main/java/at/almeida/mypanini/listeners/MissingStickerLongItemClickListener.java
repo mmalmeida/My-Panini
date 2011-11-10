@@ -1,15 +1,11 @@
 package at.almeida.mypanini.listeners;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ImageView;
-import android.widget.TextView;
 import at.almeida.mypanini.R;
 import at.almeida.mypanini.adapters.SitckerAdapter;
 import at.almeida.picker.NumberPicker;
@@ -63,14 +59,7 @@ public class MissingStickerLongItemClickListener implements
 		_currentStickerCount = _stickerAdapter.getStickerCountAtPosition(position);
 		_currentStickerId = _stickerAdapter.getItemId(position);
 		numberPicker.setCurrent(_currentStickerCount);
-		numberPicker.setOnChangeListener(new NumberPicker.OnChangedListener() {
-			
-			
-			public void onChanged(NumberPicker picker, int oldVal, int newVal) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
+		numberPicker.setOnChangeListener(new NumberPickerOnChangeListener(activity,_currentStickerId));
 
 		return true;
 	}

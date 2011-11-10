@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.TabHost;
 import at.almeida.mypanini.activity.DuplicateItemsActivity;
 import at.almeida.mypanini.activity.MissingItemsActivity;
+import at.almeida.mypanini.adapters.StickerAlbumDbAdapter;
 
 public class MyPanini extends TabActivity {
 	
