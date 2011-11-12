@@ -39,7 +39,7 @@ public class MissingStickerLongItemClickListener implements
 			long id) {
 
 		
-		Dialog dialog = buildDialog(v);
+		Dialog dialog = buildDialog(v,position);
 
 
 		buildNumberPicker(dialog,position);
@@ -72,11 +72,12 @@ public class MissingStickerLongItemClickListener implements
 	 * Creates and populates the Dialog that is shown
 	 * @param v
 	 */
-	private Dialog buildDialog(View v) {
+	private Dialog buildDialog(View v,int position) {
 		Dialog dialog = new Dialog(v.getContext());
 
 		dialog.setContentView(R.layout.sticker_count_changer_layout);
-		dialog.setTitle("Custom Dialog");
+		dialog.setTitle("Sticker number " + _stickerAdapter
+				.getAlbum().getStickerAtPosition(position));
 
 		ImageView image = (ImageView) dialog
 				.findViewById(R.id.sticker_count_image);
