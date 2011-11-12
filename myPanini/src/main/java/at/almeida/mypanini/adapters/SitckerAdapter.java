@@ -1,8 +1,5 @@
 package at.almeida.mypanini.adapters;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import android.app.Activity;
 import android.database.Cursor;
 import android.graphics.Typeface;
@@ -25,13 +22,18 @@ public class SitckerAdapter extends BaseAdapter {
 
 	private Activity context;
 
-	private Set<Integer> currentlySelected = new HashSet<Integer>();
 	private int size;
 	private StickerAlbumDbAdapter stickerDbAdapter;
 
 	private StickerAlbumMemory album;
 
 	private Typeface font;
+
+	
+	
+	public StickerAlbumMemory getAlbum() {
+		return album;
+	}
 
 	public Long getAlbumId() {
 		return album.getAlbumId();
