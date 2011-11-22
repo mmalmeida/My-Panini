@@ -35,6 +35,7 @@ public class MyPanini extends TabActivity {
 
 	    // Do the same for the other tabs
 	    intent = new Intent(this, DuplicateItemsActivity.class);
+	    intent.putExtra(StickerAlbumDbAdapter.KEY_ID, 1L);
 	    spec = tabHost.newTabSpec("duplicate").setIndicator("Duplicate",
 	                      res.getDrawable(R.drawable.ic_tab_missing))
 	                  .setContent(intent);

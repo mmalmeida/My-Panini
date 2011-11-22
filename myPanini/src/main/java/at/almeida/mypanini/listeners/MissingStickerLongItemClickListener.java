@@ -7,7 +7,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ImageView;
 import at.almeida.mypanini.R;
-import at.almeida.mypanini.adapters.SitckerAdapter;
+import at.almeida.mypanini.adapters.AbstractStickerAdapter;
+import at.almeida.mypanini.adapters.MissingStickerAdapter;
 import at.almeida.mypanini.model.StickerAlbumMemory;
 import at.almeida.picker.NumberPicker;
 import at.almeida.picker.NumberPickerDialog;
@@ -17,7 +18,7 @@ public class MissingStickerLongItemClickListener implements
 
 	private Activity activity;
 	private int _currentStickerCount;
-	private SitckerAdapter _stickerAdapter;
+	private AbstractStickerAdapter _stickerAdapter;
 	private long _currentStickerId;
 
 	public MissingStickerLongItemClickListener() {
@@ -30,7 +31,7 @@ public class MissingStickerLongItemClickListener implements
 	}
 
 	public MissingStickerLongItemClickListener(Activity missingItemsActivity,
-			SitckerAdapter stickerAdapter) {
+			AbstractStickerAdapter stickerAdapter) {
 		this(missingItemsActivity);
 		_stickerAdapter = stickerAdapter;
 	}

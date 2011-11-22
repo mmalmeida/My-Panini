@@ -2,7 +2,8 @@ package at.almeida.mypanini.listeners;
 
 import android.app.Activity;
 import android.content.Context;
-import at.almeida.mypanini.adapters.SitckerAdapter;
+import at.almeida.mypanini.adapters.AbstractStickerAdapter;
+import at.almeida.mypanini.adapters.MissingStickerAdapter;
 import at.almeida.mypanini.adapters.StickerAlbumDbAdapter;
 import at.almeida.mypanini.model.StickerAlbumMemory;
 import at.almeida.picker.NumberPicker;
@@ -21,7 +22,7 @@ public class NumberPickerOnChangeListener implements OnChangedListener {
 	int _currentStickerPosition;
 	StickerAlbumDbAdapter stickerDbAdapter;
 	private Context _context;
-	private SitckerAdapter _stickerAdapter;
+	private AbstractStickerAdapter _stickerAdapter;
 
 	public NumberPickerOnChangeListener(Context context, long currentStickerId) {
 		_currentStickerId = currentStickerId;
@@ -31,7 +32,7 @@ public class NumberPickerOnChangeListener implements OnChangedListener {
 	}
 
 	public NumberPickerOnChangeListener(Activity activity,
-			long currentStickerId, int position, SitckerAdapter stickerAdapter) {
+			long currentStickerId, int position, AbstractStickerAdapter stickerAdapter) {
 		this(activity, currentStickerId);
 		_stickerAdapter = stickerAdapter;
 		_currentStickerPosition = position;
