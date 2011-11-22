@@ -16,4 +16,12 @@ public class DuplicateItemsActivity  extends StickerAbstractActivity {
 		return new DuplicateStickerAdapter(this,albumId);
 	}
 
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+	}
+
+
+
 }

@@ -3,6 +3,7 @@ package at.almeida.mypanini.adapters;
 import android.app.Activity;
 import android.database.Cursor;
 import android.view.View;
+import android.view.ViewGroup;
 
 /**
  * BaseAdapter for our sticker collection.
@@ -26,6 +27,8 @@ public class MissingStickerAdapter extends AbstractStickerAdapter {
 		
 		return getStickerDbAdapter().getAlbumStickers(albumId);
 	}
+	
+	
 	public void updateCurrentSelection(View v, int position,
 			long stickerToChangeId) {
 		if (iscurrentlySelected(position)) {
@@ -39,6 +42,20 @@ public class MissingStickerAdapter extends AbstractStickerAdapter {
 		}
 
 	}
+
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		View view = super.getView(position, convertView, parent);
+		if (getAlbum().getStickerCountAtPosition(position)> 0) {
+			markAsHaveIt(view);
+		} else {
+			markAsDontHaveIt(view);
+		}
+		return view;
+		
+	}
+	
+	
 
 	
 	

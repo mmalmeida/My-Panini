@@ -3,6 +3,7 @@ package at.almeida.mypanini.adapters;
 import android.app.Activity;
 import android.database.Cursor;
 import android.view.View;
+import android.view.ViewGroup;
 
 public class DuplicateStickerAdapter extends AbstractStickerAdapter {
 
@@ -24,6 +25,14 @@ public class DuplicateStickerAdapter extends AbstractStickerAdapter {
 	public void updateCurrentSelection(View v, int position,
 			long stickerToChangeId) {
 		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		View view = super.getView(position, convertView, parent);
+		markAsDontHaveIt(view);
+		return view;
 		
 	}
 

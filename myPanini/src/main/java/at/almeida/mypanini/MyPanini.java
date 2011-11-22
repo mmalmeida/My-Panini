@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.widget.TabHost;
+import android.widget.TabHost.OnTabChangeListener;
 import at.almeida.mypanini.activity.DuplicateItemsActivity;
 import at.almeida.mypanini.activity.MissingItemsActivity;
 import at.almeida.mypanini.adapters.StickerAlbumDbAdapter;
@@ -41,8 +42,15 @@ public class MyPanini extends TabActivity {
 	                  .setContent(intent);
 	    tabHost.addTab(spec);
 
-
 	    tabHost.setCurrentTab(2);
+	    tabHost.setOnTabChangedListener(new OnTabChangeListener() {
+			
+			@Override
+			public void onTabChanged(String tabId) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 	}
 
 	

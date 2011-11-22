@@ -58,36 +58,40 @@ public abstract class AbstractStickerAdapter extends BaseAdapter implements List
 		buildFromAlbumId(context, albumId);
 	}
 
+	public void populateModel(Long albumId){
+		Cursor stickers = retrieveStickersFromDb(albumId);
+
+		size = stickers.getCount();
+		album = new StickerAlbumMemory(size);
+		setAlbumId(albumId);
+
+		stickers.moveToFirst();
+		int numberIndex = stickers
+				.getColumnIndex(StickerAlbumDbAdapter.KEY_NUMBER);
+		int idIndex = stickers
+				.getColumnIndex(StickerAlbumDbAdapter.KEY_ID);
+		int countIndex = stickers
+				.getColumnIndex(StickerAlbumDbAdapter.KEY_COUNT);
+		while (stickers.isAfterLast() == false) {
+			int position = stickers.getPosition();
+			album.setStickerAtPosition(position,
+					stickers.getString(numberIndex));
+
+			album.setStickerIdAtPosition(position,
+					stickers.getLong(idIndex));
+
+			album.setStickerCountAtPosition(position,
+					stickers.getInt(countIndex));
+
+			stickers.moveToNext();
+		}
+	}
 	private void buildFromAlbumId(Activity context, Long albumId) {
 		stickerDbAdapter = new StickerAlbumDbAdapter(context);
 		stickerDbAdapter.open();
 		if (albumId != null) {
-			Cursor stickers = retrieveStickersFromDb(albumId);
-
-			size = stickers.getCount();
-			album = new StickerAlbumMemory(size);
-			setAlbumId(albumId);
-
-			stickers.moveToFirst();
-			int numberIndex = stickers
-					.getColumnIndex(StickerAlbumDbAdapter.KEY_NUMBER);
-			int idIndex = stickers
-					.getColumnIndex(StickerAlbumDbAdapter.KEY_ID);
-			int countIndex = stickers
-					.getColumnIndex(StickerAlbumDbAdapter.KEY_COUNT);
-			while (stickers.isAfterLast() == false) {
-				int position = stickers.getPosition();
-				album.setStickerAtPosition(position,
-						stickers.getString(numberIndex));
-
-				album.setStickerIdAtPosition(position,
-						stickers.getLong(idIndex));
-	
-				album.setStickerCountAtPosition(position,
-						stickers.getInt(countIndex));
-
-				stickers.moveToNext();
-			}
+			
+			populateModel(albumId);
 		}
 
 		this.context = context;
@@ -142,11 +146,7 @@ public abstract class AbstractStickerAdapter extends BaseAdapter implements List
 		if (font != null) {
 			tv.setTypeface(font);
 		}
-		if (album.getStickerCountAtPosition(position)> 0) {
-			markAsHaveIt(myView);
-		} else {
-			markAsDontHaveIt(myView);
-		}
+
 		tv.setText(album.getStickerAtPosition(position));
 
 		return myView;
