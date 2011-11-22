@@ -116,14 +116,21 @@ public class StickerAlbumDbAdapter {
 	}
 
 	public Cursor getAlbumMissingStickers(long albumId) {
-		
-		return mDb.query(TABLE_STICKERS,  new String[] {KEY_ID,KEY_NUMBER,KEY_COUNT,FK_ALBUM}, FK_ALBUM + "= "+ albumId + " AND " + KEY_COUNT + " = 0", null, null, null, null);
+		String whereClause =  FK_ALBUM + "= "+ albumId + " AND " + KEY_COUNT + " = 0";
+		return queryAlbumStickers(albumId,whereClause);
 	}
 
-	private Cursor generalStickerQuery(String where) {
+
+	public Cursor getDuplicateStickers(long albumId) {
 		
-		return mDb.query(TABLE_STICKERS,  new String[] {KEY_ID,KEY_NUMBER,KEY_COUNT,FK_ALBUM}, where, null, null, null, null);
+		String whereClause =  FK_ALBUM + "= "+ albumId + " AND " + KEY_COUNT + " > 1";
+		return queryAlbumStickers(albumId,whereClause);
 	}
+
+	private Cursor queryAlbumStickers(long albumId, String whereClause) {
+		return mDb.query(TABLE_STICKERS,  new String[] {KEY_ID,KEY_NUMBER,KEY_COUNT,FK_ALBUM}, whereClause, null, null, null, null);
+	}
+	
 	private void insertAlbumLine(String stickerNumber,int times,long albumId){
     	ContentValues initialValues = new ContentValues();
     	initialValues.put(KEY_NUMBER, stickerNumber);
@@ -144,7 +151,6 @@ public class StickerAlbumDbAdapter {
 	public void changeStickerCount(Long stickerIdToChange, int newCount) {
 		mDb.beginTransaction();
 		ContentValues updateValues = new ContentValues();
-		//updateValues.put(KEY_NUMBER, stickerIdToChange);
 		updateValues.put(KEY_COUNT, newCount);
 		mDb.update(TABLE_STICKERS, updateValues, KEY_ID+"=?",  new String []{String.valueOf(stickerIdToChange)});
 		
