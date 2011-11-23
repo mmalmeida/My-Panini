@@ -34,7 +34,11 @@ public abstract class AbstractStickerAdapter extends BaseAdapter implements List
 	}
 
 	public Long getAlbumId() {
-		return album.getAlbumId();
+		if(album != null){
+			return album.getAlbumId();
+		}
+		else
+			return null;
 	}
 
 	public void setAlbumId(Long albumId) {

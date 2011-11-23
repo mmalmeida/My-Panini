@@ -17,6 +17,7 @@ public abstract class StickerAbstractActivity extends Activity {
 
 	protected Long albumId;
 	protected AbstractStickerAdapter stickerAdapter;
+	private boolean skipLoad;
 
 	public static String FONT_MIA = "fonts/MiasScribblings.ttf";
 
@@ -50,6 +51,7 @@ public abstract class StickerAbstractActivity extends Activity {
 		GridView gridview = (GridView) findViewById(R.id.stickergridview);
 
 		stickerAdapter = createStickerAdapter();
+		skipLoad = true;
 
 		stickerAdapter.changeFont(findFont(FONT_MIA));
 		gridview.setAdapter(stickerAdapter);
@@ -74,9 +76,10 @@ public abstract class StickerAbstractActivity extends Activity {
 	
 	@Override
 	protected void onResume() {
-		if(stickerAdapter.getAlbumId() != null){
+		if(stickerAdapter.getAlbumId() != null != skipLoad){
 			stickerAdapter.populateModel(stickerAdapter.getAlbumId());
 			stickerAdapter.notifyDataSetChanged();
+			skipLoad = false;
 		}
 		
 		super.onResume();
