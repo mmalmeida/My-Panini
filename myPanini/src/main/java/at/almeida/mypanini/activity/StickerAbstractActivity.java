@@ -76,12 +76,12 @@ public abstract class StickerAbstractActivity extends Activity {
 	
 	@Override
 	protected void onResume() {
-		if(stickerAdapter.getAlbumId() != null != skipLoad){
+		if(stickerAdapter.getAlbumId() != null && !skipLoad){
 			stickerAdapter.populateModel(stickerAdapter.getAlbumId());
 			stickerAdapter.notifyDataSetChanged();
-			skipLoad = false;
+			
 		}
-		
+		skipLoad = false;
 		super.onResume();
 	}
 
