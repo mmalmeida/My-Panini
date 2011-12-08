@@ -24,7 +24,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AlbumCreate" />
         <activity android:name=".activity.MissingItemsActivity" />
         <activity android:name=".activity.DuplicateItemsActivity" />
         <activity

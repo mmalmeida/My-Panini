@@ -51,6 +51,8 @@ containing a value of this type.
         public static final int wrap=0x7f010004;
     }
     public static final class color {
+        public static final int black=0x7f060001;
+        public static final int blue=0x7f060002;
         public static final int white=0x7f060000;
     }
     public static final class drawable {
@@ -96,35 +98,33 @@ containing a value of this type.
         public static final int timepicker_up_selected=0x7f020027;
     }
     public static final class id {
-        public static final int albumName=0x7f070002;
-        public static final int albumSaveButton=0x7f070005;
         public static final int createAlbumButton=0x7f070000;
-        public static final int decrement=0x7f070006;
-        public static final int increment=0x7f070008;
-        public static final int layout_root=0x7f07000c;
-        public static final int missing_item_grid_image=0x7f07000a;
-        public static final int missing_item_grid_text=0x7f070009;
-        public static final int pref_num_picker=0x7f07000b;
-        public static final int stickerFrom=0x7f070003;
-        public static final int stickerTo=0x7f070004;
-        public static final int sticker_count_image=0x7f07000d;
-        public static final int sticker_count_nr_picker=0x7f07000e;
-        public static final int stickergridview=0x7f07000f;
+        public static final int decrement=0x7f070002;
+        public static final int increment=0x7f070004;
+        public static final int layout_root=0x7f070008;
+        public static final int missing_item_grid_image=0x7f070006;
+        public static final int missing_item_grid_text=0x7f070005;
+        public static final int pref_num_picker=0x7f070007;
+        public static final int sticker_count_image=0x7f070009;
+        public static final int sticker_count_nr_picker=0x7f07000a;
+        public static final int stickergridview=0x7f07000b;
+        public static final int tabsLayout=0x7f07000c;
+        public static final int tabsText=0x7f07000d;
         public static final int text1=0x7f070001;
-        public static final int timepicker_input=0x7f070007;
+        public static final int timepicker_input=0x7f070003;
     }
     public static final class layout {
         public static final int album_details=0x7f030000;
         public static final int album_list=0x7f030001;
         public static final int album_row=0x7f030002;
-        public static final int create_album=0x7f030003;
-        public static final int horizontal_number_picker=0x7f030004;
-        public static final int main=0x7f030005;
-        public static final int missing_item_gridview=0x7f030006;
-        public static final int number_picker=0x7f030007;
-        public static final int number_picker_pref=0x7f030008;
-        public static final int sticker_count_changer_layout=0x7f030009;
-        public static final int sticker_gridview=0x7f03000a;
+        public static final int horizontal_number_picker=0x7f030003;
+        public static final int main=0x7f030004;
+        public static final int missing_item_gridview=0x7f030005;
+        public static final int number_picker=0x7f030006;
+        public static final int number_picker_pref=0x7f030007;
+        public static final int sticker_count_changer_layout=0x7f030008;
+        public static final int sticker_gridview=0x7f030009;
+        public static final int tab_option=0x7f03000a;
     }
     public static final class string {
         public static final int add_album_button=0x7f050004;

@@ -15,6 +15,8 @@
 
     
     <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="blue">#2053DE</color>
     
     <string name="dialog_set_number">Set</string>
     <string name="dialog_cancel">Cancel</string>

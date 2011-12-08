@@ -1,6 +1,8 @@
 package at.almeida.mypanini.activity;
 
+import constants.Fonts;
 import android.app.Activity;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
@@ -19,7 +21,7 @@ public abstract class StickerAbstractActivity extends Activity {
 	protected AbstractStickerAdapter stickerAdapter;
 	private boolean skipLoad;
 
-	public static String FONT_MIA = "fonts/MiasScribblings.ttf";
+
 
 	protected void alterTextViewFont(TextView textview, String fontLocation) {
 		Typeface tf = Typeface.createFromAsset(getAssets(), fontLocation);
@@ -53,7 +55,7 @@ public abstract class StickerAbstractActivity extends Activity {
 		stickerAdapter = createStickerAdapter();
 		skipLoad = true;
 
-		stickerAdapter.changeFont(findFont(FONT_MIA));
+		stickerAdapter.changeFont(findFont(Fonts.FONT_OHHAY));
 		gridview.setAdapter(stickerAdapter);
 
 		gridview.setOnItemClickListener(new OnItemClickListener() {
